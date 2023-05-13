@@ -1,7 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\ApiHello;
+use App\Http\Controllers\ClientController;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('cors')->group(function () {
+    Route::get('/hello', [ApiHello::class,'index']
+    );
+    //Route на регистрацию пользователя
+    Route::post('/registration',[ClientController::class,'registration']
+    );
+    //Route на аутентификацию пользователя
+    Route::post('/login',[ClientController::class,'login']
+    );
+
+    Route::prefix('settings')->group(function(){
+        //Изменение пароля
+        Route::post('/change_password',[ClientController::class,'change_password']
+        );
+    });
 });
+
