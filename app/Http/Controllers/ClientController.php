@@ -11,6 +11,7 @@ class ClientController extends Controller
 {
     public function registration(Request $request){
         $new_client = new Client();
+        $new_client -> id =$request->{"id"};
         $new_client->login = $request->{"login"};
         $new_client->email =  $request->{"email"};
         $new_client->password= Hash::make($request->{"password"});
