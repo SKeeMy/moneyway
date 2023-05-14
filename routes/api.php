@@ -32,5 +32,6 @@ Route::middleware('cors')->group(function () {
         Route::post('/change_password',[ClientController::class,'change_password']
         );
     });
+
 });
 
