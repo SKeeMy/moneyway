@@ -4,25 +4,23 @@ import styles from './Login.module.css'
 import { useState } from 'react';
 import Tilt from 'react-parallax-tilt'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 
 
 export default function RegisterComp() {
     const [values, setValues] = useState({
-        login: "",
         email: "",
         password: "",
-        confirmPassword: "",
-        age: ""
     });
 
     const inputs = [
         {
             id: 1,
-            name: "login",
-            type: "text",
-            placeholder: "Login",
+            name: "email",
+            type: "email",
+            placeholder: "Email",
 
         },
         {
@@ -34,10 +32,6 @@ export default function RegisterComp() {
 
     ]
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-    }
 
     const onChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value })
@@ -46,7 +40,33 @@ export default function RegisterComp() {
     const routeHandler = () => {
         navigate('/');
     }
-    console.log(values);
+
+
+
+
+    function sendAPI(values) {
+        axios.post('http://backend//api/login', values)
+            .then(res => {
+                const token = res.data.data.remember_token
+                console.log('Response from API: ', token);
+                localStorage.setItem(values.email, token)
+                if (res.status === 200) {
+                    navigate('/dashboard')
+                }
+            })
+            .catch(error => {
+                alert('Oops, some error here: ' + error)
+                console.error('Error while sending data:', error)
+            });
+
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        sendAPI(values);
+    }
+
+
     return (
         <div className={styles['bg']}>
             <div className={styles['cicle']}></div>
@@ -77,7 +97,9 @@ export default function RegisterComp() {
                                 onChange={onChange} />
                         ))}
 
-                        <button >Submit</button>
+
+
+                        <button onClick={handleSubmit}>Submit</button>
                     </form>
 
                 </div>

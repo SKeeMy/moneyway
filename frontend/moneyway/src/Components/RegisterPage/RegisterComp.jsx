@@ -65,7 +65,7 @@ export default function RegisterComp() {
             placeholder: "Your age",
             errorMsg: "Only numbers bigger zero",
             pattern: `^([0-9]|([1-9][0-9])|100)$`,
-            required: true
+            required: true,
         }
     ]
 
@@ -79,12 +79,10 @@ export default function RegisterComp() {
     const routeHandler = () => {
         navigate('/login');
     }
-    // const sendDataToServer = (e) => {
-    //     e.preventDefault();
-    //     console.log(values.login)
-    // }
+
+
     function sendAPI(values) {
-        axios.post('https://63ebb1b531ef61473b1789d1.mockapi.io/item', values)
+        axios.post('http://backend/api/registration', values)
             .then(res => {
                 console.log('Response from API: ', res);
                 if (res.status === 201) {
