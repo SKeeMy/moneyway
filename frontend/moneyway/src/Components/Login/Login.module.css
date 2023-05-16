@@ -24,6 +24,7 @@
 input {
     color: white;
     font-size: 22px;
+
 }
 
 .title {
@@ -35,10 +36,12 @@ input {
     color: white;
 }
 
-h1,
+.title h1,
 h2 {
     font-size: 30px;
+    text-shadow: 2px 2px 4px #830df1, 20px 43px 40px #e912de;
 }
+
 
 ::placeholder {
     color: white;
@@ -58,8 +61,6 @@ h2 {
     100% {
         background-position: 0% 50%;
     }
-
-
 }
 
 

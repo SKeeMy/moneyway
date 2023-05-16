@@ -51,7 +51,7 @@ export default function RegisterComp() {
                 console.log('Response from API: ', token);
                 localStorage.setItem(values.email, token)
                 if (res.status === 200) {
-                    navigate('/dashboard')
+                    navigate('/Layout')
                 }
             })
             .catch(error => {
