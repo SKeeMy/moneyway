@@ -1,21 +1,4 @@
-.wrapper h1 {
-    padding-top: 30px;
-    padding-bottom: 10px;
-    margin-left: 40px;
-    color: white;
-    text-shadow: 2px 2px 4px #F10D58, 20px 43px 40px #4578D5;
-    font-size: 40px;
-}
-
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-right: 30px;
-
-}
-
-.Dashboard {
+.innerBackground {
     border-radius: 30px;
     margin-bottom: 10px;
     display: flex;
