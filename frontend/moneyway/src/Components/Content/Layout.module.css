@@ -10,6 +10,8 @@
 
 .content_wrapper {
     display: flex;
+    height: 100vh;
+    padding-bottom: 200px;
 }
 
 .items {
@@ -17,8 +19,8 @@
 }
 
 .wrapper h1 {
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 10px;
     margin-left: 40px;
     color: white;
     text-shadow: 2px 2px 4px #F10D58, 20px 43px 40px #4578D5;
@@ -26,7 +28,7 @@
 }
 
 h2 {
-    text-shadow: 1px 1px 4px #F10D58;
+    text-shadow: none;
 }
 
 .wrapper {
@@ -38,6 +40,7 @@ h2 {
 
 .Dashboard {
     border-radius: 30px;
+    margin-bottom: 10px;
     display: flex;
     flex: 1;
     background: linear-gradient(135deg, rgb(29, 29, 29), rgb(31, 31, 31));
@@ -53,7 +56,8 @@ h2 {
 
 .Sidebar {
     width: 283px;
-    height: 96vh;
+    max-height: 96vh;
+    margin-bottom: 10px;
     background: linear-gradient(135deg, rgba(17, 17, 17, 0.945), rgba(10, 10, 10, 0.842));
     backdrop-filter: blur(10px);
     border-radius: 20px;
@@ -65,7 +69,14 @@ h2 {
     margin-left: 10px;
     margin-top: 15px;
     border-radius: 15px;
-    box-shadow: inset 0px 0px 4px 4px #ffffff79
+    box-shadow: inset 0px 0px 4px 4px #ffffff79;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar_title {
+    text-shadow: 2px 2px 4px #F10D58;
 }
 
 .sidebar_header {
@@ -128,6 +139,7 @@ h2 {
     cursor: pointer;
     user-select: none;
     padding-right: 20px;
+    transition: ease-in-out .2s;
 }
 
 .manage_flex {
@@ -135,6 +147,14 @@ h2 {
     display: flex;
     align-items: center;
     padding-bottom: 10px;
+}
+
+.manage_active {
+    font-size: 23px;
+    cursor: pointer;
+    user-select: none;
+    padding-right: 20px;
+    text-shadow: 1px 3px 4px #df00fc;
 }
 
 .arrow {
@@ -146,7 +166,6 @@ h2 {
 .arrow_closed {
     width: 25px;
     height: 25px;
-    transform: rotate(0);
     transition: ease-in-out .2s;
 }
 
@@ -168,6 +187,48 @@ h2 {
     transition: ease-in-out .2s;
 }
 
+.preference_flex {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.logout_icon {
+    width: 40px;
+    height: 37px;
+    cursor: pointer;
+    transition: ease-in-out .2s;
+}
+
+.logout_icon:hover {
+    color: #FF5789;
+}
+
+.user_wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 275px;
+    padding-bottom: 50px;
+    padding-top: 10px;
+}
+
+.username {
+    width: 140px;
+    display: block;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    font-size: 20px;
+    color: white
+}
 
 
 

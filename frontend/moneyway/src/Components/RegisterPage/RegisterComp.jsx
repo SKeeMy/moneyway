@@ -85,6 +85,7 @@ export default function RegisterComp() {
         axios.post('http://backend/api/registration', values)
             .then(res => {
                 console.log('Response from API: ', res);
+                localStorage.setItem(inputs.name)
                 if (res.status === 201) {
                     navigate('/login')
                 }

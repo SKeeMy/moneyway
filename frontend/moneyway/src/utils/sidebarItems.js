@@ -1,4 +1,4 @@
-export const sidebarItems = [
+export const sidebarItemsManage = [
     {
         id: 1,
         title: 'Dashboard',
@@ -24,4 +24,19 @@ export const sidebarItems = [
         link: '/report'
     }
 
+];
+
+export const sidebarItemsPreference = [
+    {
+        id: 5,
+        title: 'Settings',
+        icon:'faGear',
+        link: '/settings'
+    },
+    {
+        id: 6,
+        title: 'Theme',
+        icon:'faLightbulb'
+    }
 ]
+
