@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\ClientController' => $baseDir . '/app/Http/Controllers/ClientController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
@@ -19,6 +20,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Resources\\ApiHelloResource' => $baseDir . '/app/Http/Resources/ApiHelloResource.php',
+    'App\\Models\\Client' => $baseDir . '/app/Models/Client.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
@@ -4317,7 +4319,6 @@ return array(
     'Symfony\\Component\\Finder\\Exception\\AccessDeniedException' => $vendorDir . '/symfony/finder/Exception/AccessDeniedException.php',
     'Symfony\\Component\\Finder\\Exception\\DirectoryNotFoundException' => $vendorDir . '/symfony/finder/Exception/DirectoryNotFoundException.php',
     'Symfony\\Component\\Finder\\Finder' => $vendorDir . '/symfony/finder/Finder.php',
-    'Symfony\\Component\\Finder\\Gitignore' => $vendorDir . '/symfony/finder/Gitignore.php',
     'Symfony\\Component\\Finder\\Glob' => $vendorDir . '/symfony/finder/Glob.php',
     'Symfony\\Component\\Finder\\Iterator\\CustomFilterIterator' => $vendorDir . '/symfony/finder/Iterator/CustomFilterIterator.php',
     'Symfony\\Component\\Finder\\Iterator\\DateRangeFilterIterator' => $vendorDir . '/symfony/finder/Iterator/DateRangeFilterIterator.php',
