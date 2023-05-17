@@ -28,3 +28,83 @@
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.541);
     color: white;
 }
+
+.Dashboard_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.Dashboard_card {
+    max-width: 352px;
+    max-height: 219px;
+    background-color: #D3D3D3;
+    border-radius: 25px;
+    padding: 10px 40px;
+    box-shadow: rgba(241, 2, 222, 0.4) 0px 2px 4px, rgba(153, 0, 255, 0.3) 0px 7px 13px -3px, rgba(255, 2, 2, 0.2) 0px -3px 0px inset;
+    cursor: pointer;
+}
+
+.Dashboard_card .icon {
+    width: 42px;
+    height: 42px;
+    background-color: #FF7AA2;
+    padding: 20px 20px;
+    border: 1px solid #FF7AA2;
+    border-radius: 50%;
+
+}
+
+.title {
+    color: #656464;
+    font-size: 32px;
+    padding: 0 20px;
+    font-weight: medium;
+}
+
+.balance {
+    color: #292929;
+    font-size: 40px;
+    padding: 0 20px;
+    font-weight: medium;
+    min-width: 240px;
+}
+
+.modal_window {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.541);
+    color: white;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.modal_window ::placeholder {
+    color: #ffffff;
+    font-size: 20px;
+
+}
+
+.modal_window button {
+    border-radius: 10px;
+    padding: 0 5px;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.modal_window button:hover {
+    text-shadow: 1px 1px 1px #F10D58
+}
+
+.modal_window input {
+    background-color: inherit;
+    border: none;
+    padding: 5px 0;
+    color: black;
+}

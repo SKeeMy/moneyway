@@ -22,7 +22,7 @@ const iconsMapingPref = {
 export default function Sidebar(props) {
   const [visibleManage, setVisibleManage] = useState(false);
   const [visiblePreference, setVisiblePreference] = useState(false);
-  const [sidebar, setSidebar] = useState(false);
+  const [sidebar, setSidebar] = useState(true);
 
 
 
