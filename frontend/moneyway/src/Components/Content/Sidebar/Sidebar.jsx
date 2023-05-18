@@ -26,7 +26,7 @@ export default function Sidebar(props) {
 
 
 
-  const email = localStorage.key('email');
+  const login = localStorage.getItem('login');
   return (
     <div>
       <div onClick={() => setSidebar(prevSetSidebar => !prevSetSidebar)} className={styles['sidebar_button']}>
@@ -97,7 +97,7 @@ export default function Sidebar(props) {
 
             <div className={styles['user']}>
               <img src="avatar.png" alt="Avatart" />
-              <span className={styles['username']}>{email}</span>
+              <span className={styles['username']}>{login}</span>
               <FontAwesomeIcon icon={faRightFromBracket} className={styles['logout_icon']} />
             </div>
 
