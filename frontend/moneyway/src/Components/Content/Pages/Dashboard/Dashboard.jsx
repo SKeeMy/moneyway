@@ -8,6 +8,7 @@ import { DashboardCards } from './DashboardCard';
 import TotalBalance from './Charts/TotalBalance/TotalBalance';
 import MoneySpending from './Charts/MoneySpending/MoneySpending';
 import MoneySaved from './Charts/MoneySaved/MoneySaved';
+import MoneySpendingEdit from './Charts/MoneySpending/MoneySpendingEdit';
 
 const dashboardCards = [
     {
@@ -35,6 +36,9 @@ export default function Dashboard() {
     const [totalBalanceChange, setTotalBalanceChange] = useState(false)
     const [value, setValue] = useState(0);
     const [active, setActive] = useState(0);
+    const [btnEdit, setBtnEdit] = useState('hi');
+
+    console.log(btnEdit)
     console.log(active)
     const displayData = () => {
         switch (active) {
@@ -47,6 +51,13 @@ export default function Dashboard() {
             default: return <TotalBalance />
 
 
+        }
+    }
+    const spendEdit = () => {
+        switch (btnEdit) {
+            case true:
+                return <MoneySpendingEdit />
+            default: return <MoneySpending />
         }
     }
     return (
@@ -78,6 +89,7 @@ export default function Dashboard() {
                             else
                                 return (
                                     <DashboardCards className={active === card.id ? styles['Dashboard_card_active'] : styles['Dashboard_card']}
+                                        setBtnEdit={setBtnEdit}
                                         key={card.id}
                                         icon={card.icon}
                                         id={card.id}
@@ -97,7 +109,7 @@ export default function Dashboard() {
                     </div>
                 </div>
                 <div className={styles['graphics']}>
-                    {displayData()}
+                    {active === 2 ? spendEdit() : displayData()}
                 </div>
             </div>
         </motion.div>

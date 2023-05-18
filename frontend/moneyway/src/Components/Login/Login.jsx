@@ -45,11 +45,13 @@ export default function RegisterComp() {
 
 
     function sendAPI(values) {
-        axios.post('http://backend//api/login', values)
+        axios.post('http://backend/api/login', values)
             .then(res => {
                 console.log(res)
-                let token = res.data.data.remember_token
+                const token = res.data.data.remember_token;
+                const login = res.data.login;
                 console.log('Response from API: ', token);
+                console.log('Response from API: ', login);
                 localStorage.setItem(values.email, token);
                 if (res.status === 200) {
                     navigate('/Layout')
