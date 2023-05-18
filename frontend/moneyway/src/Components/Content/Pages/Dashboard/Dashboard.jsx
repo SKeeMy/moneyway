@@ -4,21 +4,25 @@ import '../../../../App.css'
 import { motion } from 'framer-motion'
 import { useState } from 'react';
 import DashboardCard from './DashboardCard';
+import { DashboardCards } from './DashboardCard';
 
 const dashboardCards = [
     {
         id: 1,
         title: 'Total Balance',
+        icon: 'faWallet',
         currency: '₽'
     },
     {
         id: 2,
         title: 'Spending Money',
+        icon: 'faMoneyBillTransfer',
         currency: '₽'
     },
     {
         id: 3,
         title: 'Money Saved',
+        icon: 'faCoins',
         currency: '₽'
     },
 ]
@@ -26,7 +30,7 @@ const dashboardCards = [
 export default function Dashboard() {
     const [totalBalanceChange, setTotalBalanceChange] = useState(false)
     const [value, setValue] = useState(0);
-    const [active, setActive] = useState(1);
+    const [active, setActive] = useState(0);
     console.log(active)
     return (
         <motion.div
@@ -38,20 +42,41 @@ export default function Dashboard() {
             <div className={styles['innerBackground']}>
                 <div className={styles['Dashboard_wrapper']}>
                     <div className={styles['card_wrapper']}>
-                    {dashboardCards.map((card) => (
-                        <DashboardCard className={active === card.id ? styles['Dashboard_card_active'] : styles['Dashboard_card']}
-                            key={card.id}
-                            id={card.id}
-                            active={active}
-                            setActive={setActive}
-                            title={card.title}
-                            currency={card.currency}
-                            totalBalanceChange={totalBalanceChange}
-                            setTotalBalanceChange={setTotalBalanceChange}
-                            value={value}
-                            setValue={setValue} />
-                    ))
-                    }
+                        {dashboardCards.map((card) => {
+                            if (card.id === 1)
+                                return (
+                                    <DashboardCard className={active === card.id ? styles['Dashboard_card_active'] : styles['Dashboard_card']}
+                                        key={card.id}
+                                        icon={card.icon}
+                                        id={card.id}
+                                        active={active}
+                                        setActive={setActive}
+                                        title={card.title}
+                                        currency={card.currency}
+                                        totalBalanceChange={totalBalanceChange}
+                                        setTotalBalanceChange={setTotalBalanceChange}
+                                        value={value}
+                                        setValue={setValue} />
+                                )
+                            else
+                                return (
+                                    <DashboardCards className={active === card.id ? styles['Dashboard_card_active'] : styles['Dashboard_card']}
+                                        key={card.id}
+                                        icon={card.icon}
+                                        id={card.id}
+                                        active={active}
+                                        setActive={setActive}
+                                        title={card.title}
+                                        currency={card.currency}
+                                        totalBalanceChange={totalBalanceChange}
+                                        setTotalBalanceChange={setTotalBalanceChange}
+                                        value={value}
+                                        setValue={setValue} />
+                                )
+                        }
+
+                        )
+                        }
                     </div>
                 </div>
                 <div className={styles['graphics']}>

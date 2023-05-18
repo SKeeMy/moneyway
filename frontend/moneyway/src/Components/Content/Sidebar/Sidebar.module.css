@@ -41,7 +41,7 @@
     flex-direction: column;
     justify-content: space-between;
     min-height: 75vh;
-    overflow-x: none;
+    overflow-x: hidden;
     overflow-y: auto;
 }
 

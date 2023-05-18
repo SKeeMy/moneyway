@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Analytics.module.css'
+//import styles from './Analytics.module.css'
 import '../../../../App.css'
 import { motion } from 'framer-motion';
 
