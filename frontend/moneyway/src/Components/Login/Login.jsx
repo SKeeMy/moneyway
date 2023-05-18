@@ -48,9 +48,7 @@ export default function RegisterComp() {
         axios.post('http://backend//api/login', values)
             .then(res => {
                 const token = res.data.remember_token
-                const login = res.data.data.login
                 console.log('Response from API: ', token);
-                console.log('Response from API: ', login);
                 localStorage.setItem(values.email, token);
 
                 if (res.status === 200) {
