@@ -48,7 +48,7 @@ export function DashboardCards(props) {
                 <FontAwesomeIcon className={styles['icon']} icon={iconsMaping[props.icon]} />
                 <h3 className={styles['title']}>{props.title}</h3>
                 <form className={styles['form_card']}>
-                    <div onClick={() => setEdit(prevEdit => !prevEdit)} className={styles['edit_btn']}>{edit === false ? 'Edit' : 'Cancel'}</div>
+                    <div key={props.id} onClick={() => setEdit(prevEdit => !prevEdit)} className={styles['edit_btn']}>{edit === false ? 'Edit' : 'Cancel'}</div>
                     {edit && <button className={props.active === props.id ? styles['Dashboard_btn_active'] : styles['Dashboard_btn']} >Save</button>}
                 </form>
             </div >

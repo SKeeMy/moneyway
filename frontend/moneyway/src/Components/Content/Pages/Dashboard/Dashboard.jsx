@@ -5,6 +5,9 @@ import { motion } from 'framer-motion'
 import { useState } from 'react';
 import DashboardCard from './DashboardCard';
 import { DashboardCards } from './DashboardCard';
+import TotalBalance from './Charts/TotalBalance/TotalBalance';
+import MoneySpending from './Charts/MoneySpending/MoneySpending';
+import MoneySaved from './Charts/MoneySaved/MoneySaved';
 
 const dashboardCards = [
     {
@@ -15,7 +18,7 @@ const dashboardCards = [
     },
     {
         id: 2,
-        title: 'Spending Money',
+        title: 'Money Spending',
         icon: 'faMoneyBillTransfer',
         currency: '₽'
     },
@@ -27,11 +30,25 @@ const dashboardCards = [
     },
 ]
 
+
 export default function Dashboard() {
     const [totalBalanceChange, setTotalBalanceChange] = useState(false)
     const [value, setValue] = useState(0);
     const [active, setActive] = useState(0);
     console.log(active)
+    const displayData = () => {
+        switch (active) {
+            case 1:
+                return <TotalBalance />
+            case 2:
+                return <MoneySpending />
+            case 3:
+                return <MoneySaved />
+            default: return <TotalBalance />
+
+
+        }
+    }
     return (
         <motion.div
             initial={{ x: 50 }}
@@ -80,7 +97,7 @@ export default function Dashboard() {
                     </div>
                 </div>
                 <div className={styles['graphics']}>
-                    Graphics
+                    {displayData()}
                 </div>
             </div>
         </motion.div>
