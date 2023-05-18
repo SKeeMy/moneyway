@@ -28,8 +28,6 @@ export default function Dashboard() {
     const [value, setValue] = useState(0);
     const [active, setActive] = useState(1);
     console.log(active)
-
-    console.log(value)
     return (
         <motion.div
             initial={{ x: 50 }}
@@ -37,10 +35,11 @@ export default function Dashboard() {
             transition={{ delay: 0.2, type: 'spring', stiffness: 120 }}
             className='inner_wrapper'>
             <h1>Dashboard</h1>
-            <div className='innerBackground'>
+            <div className={styles['innerBackground']}>
                 <div className={styles['Dashboard_wrapper']}>
+                    <div className={styles['card_wrapper']}>
                     {dashboardCards.map((card) => (
-                        <DashboardCard
+                        <DashboardCard className={active === card.id ? styles['Dashboard_card_active'] : styles['Dashboard_card']}
                             key={card.id}
                             id={card.id}
                             active={active}
@@ -53,9 +52,11 @@ export default function Dashboard() {
                             setValue={setValue} />
                     ))
                     }
+                    </div>
                 </div>
-
-
+                <div className={styles['graphics']}>
+                    Graphics
+                </div>
             </div>
         </motion.div>
     )

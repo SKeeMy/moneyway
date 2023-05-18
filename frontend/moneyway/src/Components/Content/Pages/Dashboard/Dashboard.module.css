@@ -15,34 +15,50 @@
 
 }
 
-.Dashboard {
+.innerBackground {
+    height: 100%;
     border-radius: 30px;
     margin-bottom: 10px;
-    display: flex;
-    flex: 1;
+    display: grid;
+    grid-template-rows: 35% 65%;
     background: linear-gradient(135deg, rgb(29, 29, 29), rgb(31, 31, 31));
     backdrop-filter: blur(10px);
-    padding: 30px 100px;
+    padding: 30px 75px;
     border-radius: 20px;
     border: 3px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.541);
     color: white;
-}
+  }
+
 
 .Dashboard_wrapper {
     width: 100%;
-    display: flex;
-    justify-content: space-around;
-}
 
+    
+}
+.card_wrapper{
+    display: flex;
+    justify-content: space-between;
+}
 .Dashboard_card {
-    max-width: 352px;
-    max-height: 219px;
+    max-height: 100%;
     background-color: #D3D3D3;
+    border-radius: 25px;
+    padding: 10px 40px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.Dashboard_card_active{
+    max-height: 100%;
+    background-color: #444444;
     border-radius: 25px;
     padding: 10px 40px;
     box-shadow: rgba(241, 2, 222, 0.4) 0px 2px 4px, rgba(153, 0, 255, 0.3) 0px 7px 13px -3px, rgba(255, 2, 2, 0.2) 0px -3px 0px inset;
     cursor: pointer;
+    margin-right: 5px;
+    color: rgb(255, 255, 255);
+    transition: ease-in-out .2s;
+    
 }
 
 .Dashboard_card .icon {
@@ -52,14 +68,25 @@
     padding: 20px 20px;
     border: 1px solid #FF7AA2;
     border-radius: 50%;
+    color: black;
 
 }
+.Dashboard_card_active .icon {
+    width: 42px;
+    height: 42px;
+    background-color: #FF7AA2;
+    padding: 20px 20px;
+    border: 1px solid #FF7AA2;
+    border-radius: 50%;
 
+}
+.Dashboard_card_active .input_card{
+    color: white;
+}
 .title {
-    color: #656464;
-    font-size: 32px;
-    padding: 0 20px;
-    font-weight: medium;
+    color: #818181;
+    font-size: 27px;
+    font-weight: 500;
 }
 
 .balance {
@@ -107,4 +134,40 @@
     border: none;
     padding: 5px 0;
     color: black;
+}
+.graphics{
+    margin-top: 10px;
+}
+.form_card{
+    display: flex;
+}
+.input_card{
+    background-color: inherit;
+    border: none;
+    width: 200px;
+    color:rgb(0, 0, 0);
+    font-weight: bold;
+}
+.Dashboard_btn_active{
+    visibility: visible;
+    background-color: #FF7AA2;
+    border: none;
+    border-radius: 8px;
+    padding: 0 3px;
+    color: white;
+    cursor: pointer;
+    transition: ease-in-out .2s;
+}
+.Dashboard_btn_active:hover{
+transform: scale(1.02);
+}
+.Dashboard_btn{
+    visibility: hidden;
+}
+.Dashboard_card_active .icon{
+    color: white;
+} 
+.input_card::placeholder{
+    color: black;
+    font-weight: bold;
 }
