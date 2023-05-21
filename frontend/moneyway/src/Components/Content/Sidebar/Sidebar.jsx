@@ -24,8 +24,7 @@ export default function Sidebar(props) {
   const [visiblePreference, setVisiblePreference] = useState(false);
   const [sidebar, setSidebar] = useState(true);
 
-
-
+  const LOGIN = localStorage.getItem('login');
   return (
     <div>
       <div onClick={() => setSidebar(prevSetSidebar => !prevSetSidebar)} className={styles['sidebar_button']}>
@@ -96,7 +95,7 @@ export default function Sidebar(props) {
 
             <div className={styles['user']}>
               <img src="avatar.png" alt="Avatart" />
-              <span className={styles['username']}>{'123'}</span>
+              <span className={styles['username']}>{LOGIN}</span>
               <FontAwesomeIcon icon={faRightFromBracket} className={styles['logout_icon']} />
             </div>
 

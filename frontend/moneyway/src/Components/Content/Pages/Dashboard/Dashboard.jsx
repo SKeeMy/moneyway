@@ -32,7 +32,15 @@ const dashboardCards = [
 ]
 
 
+
 export default function Dashboard() {
+
+
+
+
+
+
+
     const [totalBalanceChange, setTotalBalanceChange] = useState(false)
     const [value, setValue] = useState(0);
     const [active, setActive] = useState(0);
@@ -49,13 +57,11 @@ export default function Dashboard() {
             case 3:
                 return <MoneySaved />
             default: return <TotalBalance />
-
-
         }
     }
     const spendEdit = () => {
         switch (btnEdit) {
-            case true:
+            case false:
                 return <MoneySpendingEdit />
             default: return <MoneySpending />
         }
@@ -85,6 +91,7 @@ export default function Dashboard() {
                                         setTotalBalanceChange={setTotalBalanceChange}
                                         value={value}
                                         setValue={setValue} />
+
                                 )
                             else
                                 return (
@@ -99,7 +106,6 @@ export default function Dashboard() {
                                         currency={card.currency}
                                         totalBalanceChange={totalBalanceChange}
                                         setTotalBalanceChange={setTotalBalanceChange}
-                                        value={value}
                                         setValue={setValue} />
                                 )
                         }

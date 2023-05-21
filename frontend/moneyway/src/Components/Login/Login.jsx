@@ -49,10 +49,12 @@ export default function RegisterComp() {
             .then(res => {
                 console.log(res)
                 const token = res.data.data.remember_token;
-                const login = res.data.login;
+                const login = res.data.data.login;
                 console.log('Response from API: ', token);
                 console.log('Response from API: ', login);
                 localStorage.setItem(values.email, token);
+                localStorage.setItem('remember_token', token);
+                localStorage.setItem('login', login);
                 if (res.status === 200) {
                     navigate('/Layout')
                 }
@@ -61,7 +63,6 @@ export default function RegisterComp() {
                 alert('Oops, some error here: ' + error)
                 console.error('Error while sending data:', error)
             });
-
     }
 
     const handleSubmit = (e) => {
