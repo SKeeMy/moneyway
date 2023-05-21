@@ -9,4 +9,11 @@ class Balance extends Model
 {
     protected $table = 'balance';
     protected $dateFormat = 'Y-m-d';
+    protected $fillable = [
+        'id',
+        'balance',
+        'remember_token',	
+        'created_at',
+        'updated_at',
+        ];
 }

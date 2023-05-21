@@ -26,7 +26,8 @@ class BalanceController extends Controller
         $balance = Balance::firstWhere([['updated_at', Carbon::now() -> format('Y-m-d')],
                                         ['remember_token', $remember_token]]);
         if ($balance) {
-            $balance -> update(['balance', $sum]);
+            $balance -> balance = $sum;
+            $balance -> save();
             return response() -> noContent(200);
         }
         $new_balance = new Balance();
