@@ -13,29 +13,33 @@ import Report from './Pages/Report/Report';
 
 export default function Layout() {
     const [active, setActive] = useState(1);
+    const [sidebar, setSidebar] = useState(true)
     console.log(active)
+    console.log(sidebar)
 
     const displayData = () => {
         switch (active) {
             case 1:
-                return <Dashboard />
+                return <Dashboard setSidebar={setSidebar} />
             case 2:
-                return <Analytics />
+                return <Analytics setSidebar={setSidebar} />
             case 3:
-                return <Control />
+                return <Control setSidebar={setSidebar} />
             case 4:
-                return <Report />
+                return <Report setSidebar={setSidebar} />
             default: return <Dashboard />
         }
     }
     return (
-        <div className={styles['bg']}>
+        <div className={styles['bg']} >
 
             <div className={styles['content_wrapper']}>
-                <Sidebar active={active} setActive={setActive} />
+                <Sidebar
+                    sidebar={sidebar} setSidebar={setSidebar}
+                    active={active} setActive={setActive} />
                 {displayData()}
             </div>
-        </div>
+        </div >
 
     )
 }

@@ -22,16 +22,15 @@ const iconsMapingPref = {
 export default function Sidebar(props) {
   const [visibleManage, setVisibleManage] = useState(false);
   const [visiblePreference, setVisiblePreference] = useState(false);
-  const [sidebar, setSidebar] = useState(true);
 
   const LOGIN = localStorage.getItem('login');
   return (
     <div>
-      <div onClick={() => setSidebar(prevSetSidebar => !prevSetSidebar)} className={styles['sidebar_button']}>
-        {!sidebar && <FontAwesomeIcon className={styles['bars']} icon={faBars} />}
+      <div onClick={() => props.setSidebar(prevSetSidebar => !prevSetSidebar)} className={styles['sidebar_button']}>
+        {!props.sidebar && <FontAwesomeIcon className={styles['bars']} icon={faBars} />}
       </div>
 
-      {sidebar &&
+      {props.sidebar &&
         (
           <motion.div
 

@@ -34,7 +34,7 @@ const dashboardCards = [
 
 
 
-export default function Dashboard() {
+export default function Dashboard(props) {
 
 
 
@@ -66,11 +66,11 @@ export default function Dashboard() {
                 return <MoneySpendingEdit />
             case active === 3:
                 return <MoneyIncomeEdit />
-            default: alert('Oops, pls reload the page')
+            default: return <TotalBalance />
         }
     }
     return (
-        <motion.div
+        <motion.div onClick={() => props.setSidebar(false)}
             initial={{ x: 50 }}
             animate={{ x: 0 }}
             transition={{ delay: 0.2, type: 'spring', stiffness: 120 }}
@@ -99,6 +99,7 @@ export default function Dashboard() {
                             else
                                 return (
                                     <DashboardCards className={active === card.id ? styles['Dashboard_card_active'] : styles['Dashboard_card']}
+                                        addBtn={addBtn}
                                         setAddBtn={setAddBtn}
                                         key={card.id}
                                         icon={card.icon}

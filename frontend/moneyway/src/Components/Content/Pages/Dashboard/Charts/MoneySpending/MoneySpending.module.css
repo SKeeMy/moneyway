@@ -1,0 +1,7 @@
+.add_wrapper {
+    background: #444444;
+    min-height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.308);
+    border-radius: 30px;
+    box-shadow: rgba(2, 165, 241, 0.4) 0px 2px 4px, rgba(153, 0, 255, 0.658) 0px 7px 26px -3px, rgba(255, 2, 2, 0.144) 0px -3px 0px inset;
+}

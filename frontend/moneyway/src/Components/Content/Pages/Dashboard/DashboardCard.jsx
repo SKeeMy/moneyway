@@ -95,17 +95,24 @@ export default function DashboardCard(props) {
 }
 
 export function DashboardCards(props) {
-    const [edit, setEdit] = useState(false);
 
     const handleEdit = () => {
-        setEdit(prevEdit => !prevEdit)
         if (props.id === 2) {
             props.setAddBtn(prevBtnEdit => !prevBtnEdit)
             console.log('bye')
+
         }
         else if (props.id === 3) {
             props.setAddBtn(prevBtnEdit => !prevBtnEdit)
             console.log('hi')
+
+        }
+    }
+
+    const handleClick = () => {
+        props.setActive(props.id);
+        if (props.addBtn === true) {
+            props.setAddBtn(false);
         }
 
     }
@@ -114,13 +121,14 @@ export function DashboardCards(props) {
     return (
         <Tilt className={styles['card_width']} tiltMaxAngleX={2} tiltMaxAngleY={2}>
 
-            <div onClick={() => { props.setActive(props.id) }} key={props.id} className={props.active === props.id ? styles['Dashboard_card_active'] : styles['Dashboard_card']}>
+            <div onClick={handleClick} key={props.id} className={props.active === props.id ? styles['Dashboard_card_active'] : styles['Dashboard_card']}>
                 <FontAwesomeIcon className={styles['icon']} icon={iconsMaping[props.icon]} />
                 <h3 className={styles['title']}>{props.title}</h3>
-                <form className={styles['form_card']}>
-                    <div key={props.id} onClick={handleEdit} className={styles['edit_btn']}>{edit === false ? <FontAwesomeIcon icon={faPlus} /> : 'Cancel'}</div>
-                    {edit && <button className={props.active === props.id ? styles['Dashboard_btn_active'] : styles['Dashboard_btn']} >Save</button>}
+                <  form className={styles['form_card']}>
+                    <div key={props.id} onClick={handleEdit} className={styles['edit_btn']}>{props.addBtn === true ? 'Cancel' : <FontAwesomeIcon icon={faPlus} />}</div>
+                    {props.addBtn && < button className={props.active === props.id ? styles['Dashboard_btn_active'] : styles['Dashboard_btn']} >Save</button>}
                 </form>
+
             </div >
 
         </ Tilt >
