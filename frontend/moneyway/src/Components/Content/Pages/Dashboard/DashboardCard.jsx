@@ -82,7 +82,7 @@ export default function DashboardCard(props) {
                 <form onSubmit={handleSubmit} className={styles['form_card']}>
                     <div >
 
-                        <input onChange={handleChange} prefix='$' key={props.id} className={edit ? styles['input_card_active'] : styles['input_card']} type="number" value={text} />
+                        <input onChange={handleChange} key={props.id} className={edit ? styles['input_card_active'] : styles['input_card']} type="number" value={text} />
                         <i className={styles['currency']}>₽</i>
                     </div>
                     <div onClick={() => setEdit(prevEdit => !prevEdit)} className={styles['edit_btn']}>{edit === false ? 'Edit' : 'Cancel'}</div>
@@ -126,7 +126,7 @@ export function DashboardCards(props) {
                 <h3 className={styles['title']}>{props.title}</h3>
                 <  form className={styles['form_card']}>
                     <div key={props.id} onClick={handleEdit} className={styles['edit_btn']}>{props.addBtn === true ? 'Cancel' : <FontAwesomeIcon icon={faPlus} />}</div>
-                    {props.addBtn && < button className={props.active === props.id ? styles['Dashboard_btn_active'] : styles['Dashboard_btn']} >Save</button>}
+                    {/* {props.addBtn && < button className={props.active === props.id ? styles['Dashboard_btn_active'] : styles['Dashboard_btn']} >Save</button>} */}
                 </form>
 
             </div >
