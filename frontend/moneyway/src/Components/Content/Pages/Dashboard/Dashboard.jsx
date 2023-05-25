@@ -7,8 +7,9 @@ import DashboardCard from './DashboardCard';
 import { DashboardCards } from './DashboardCard';
 import TotalBalance from './Charts/TotalBalance/TotalBalance';
 import MoneySpending from './Charts/MoneySpending/MoneySpending';
-import MoneySaved from './Charts/MoneySaved/MoneySaved';
+import MoneyIncome from './Charts/MoneySaved/MoneySaved';
 import MoneySpendingEdit from './Charts/MoneySpending/MoneySpendingEdit';
+import MoneyIncomeEdit from './Charts/MoneySaved/MoneyIncomeEdit';
 
 const dashboardCards = [
     {
@@ -25,7 +26,7 @@ const dashboardCards = [
     },
     {
         id: 3,
-        title: 'Money Saved',
+        title: 'Money Income',
         icon: 'faCoins',
         currency: '₽'
     },
@@ -44,10 +45,10 @@ export default function Dashboard() {
     const [totalBalanceChange, setTotalBalanceChange] = useState(false)
     const [value, setValue] = useState(0);
     const [active, setActive] = useState(0);
-    const [btnEdit, setBtnEdit] = useState('hi');
+    const [addBtn, setAddBtn] = useState(false);
 
-    console.log(btnEdit)
-    console.log(active)
+    console.log('add btn = ' + addBtn)
+    console.log('active =  ' + active)
     const displayData = () => {
         switch (active) {
             case 1:
@@ -55,15 +56,17 @@ export default function Dashboard() {
             case 2:
                 return <MoneySpending />
             case 3:
-                return <MoneySaved />
+                return <MoneyIncome />
             default: return <TotalBalance />
         }
     }
-    const spendEdit = () => {
-        switch (btnEdit) {
-            case false:
+    const addEdit = () => {
+        switch (addBtn) {
+            case active === 2:
                 return <MoneySpendingEdit />
-            default: return <MoneySpending />
+            case active === 3:
+                return <MoneyIncomeEdit />
+            default: alert('Oops, pls reload the page')
         }
     }
     return (
@@ -96,7 +99,7 @@ export default function Dashboard() {
                             else
                                 return (
                                     <DashboardCards className={active === card.id ? styles['Dashboard_card_active'] : styles['Dashboard_card']}
-                                        setBtnEdit={setBtnEdit}
+                                        setAddBtn={setAddBtn}
                                         key={card.id}
                                         icon={card.icon}
                                         id={card.id}
@@ -115,7 +118,7 @@ export default function Dashboard() {
                     </div>
                 </div>
                 <div className={styles['graphics']}>
-                    {active === 2 ? spendEdit() : displayData()}
+                    {addBtn === true ? addEdit() : displayData()}
                 </div>
             </div>
         </motion.div>

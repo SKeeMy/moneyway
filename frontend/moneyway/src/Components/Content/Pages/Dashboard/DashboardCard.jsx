@@ -2,7 +2,7 @@ import React from 'react'
 import Tilt from 'react-parallax-tilt'
 import styles from './Dashboard.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWallet, faMoneyBillTransfer, faCoins } from '@fortawesome/free-solid-svg-icons';
+import { faWallet, faMoneyBillTransfer, faCoins, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -100,11 +100,14 @@ export function DashboardCards(props) {
     const handleEdit = () => {
         setEdit(prevEdit => !prevEdit)
         if (props.id === 2) {
-            props.setBtnEdit(prevBtnEdit => !prevBtnEdit)
+            props.setAddBtn(prevBtnEdit => !prevBtnEdit)
+            console.log('bye')
         }
-        else {
-            console.log('Cancel')
+        else if (props.id === 3) {
+            props.setAddBtn(prevBtnEdit => !prevBtnEdit)
+            console.log('hi')
         }
+
     }
 
 
@@ -115,7 +118,7 @@ export function DashboardCards(props) {
                 <FontAwesomeIcon className={styles['icon']} icon={iconsMaping[props.icon]} />
                 <h3 className={styles['title']}>{props.title}</h3>
                 <form className={styles['form_card']}>
-                    <div key={props.id} onClick={handleEdit} className={styles['edit_btn']}>{edit === false ? 'Edit' : 'Cancel'}</div>
+                    <div key={props.id} onClick={handleEdit} className={styles['edit_btn']}>{edit === false ? <FontAwesomeIcon icon={faPlus} /> : 'Cancel'}</div>
                     {edit && <button className={props.active === props.id ? styles['Dashboard_btn_active'] : styles['Dashboard_btn']} >Save</button>}
                 </form>
             </div >

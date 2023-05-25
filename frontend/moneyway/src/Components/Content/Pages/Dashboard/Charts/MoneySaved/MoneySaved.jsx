@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function MoneySaved() {
+export default function MoneyIncome() {
     return (
-        <div>MoneySaved</div>
+        <div>MoneyIncome</div>
     )
 }
