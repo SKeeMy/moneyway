@@ -88,6 +88,9 @@
 .Dashboard_card_active .input_card {
     color: white;
 }
+.Dashboard_card_active i{ 
+    display: none;
+}
 
 .title {
     color: #818181;
