@@ -4,10 +4,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Login from './Components/Login/Login';
 import Dashboard from './Components/Content/Pages/Dashboard/Dashboard';
 import Layout from './Components/Content/Layout';
+import Loading from './utils/Loading/Loading';
 
 function App() {
-
-
 
   return (
     <div className="App">
