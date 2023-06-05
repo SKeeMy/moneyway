@@ -17,9 +17,11 @@ const iconsMaping = {
     'faChampagneGlasses': faChampagneGlasses,
     'faGrip': faGrip
 }
+
 export default function Categories(props) {
+
     return (
-        <div id={props.id} className={styles['categories']}>
+        <div key={props.key} onClick={() => props.setActive(props.id)} id={props.id} className={props.active === props.id ? styles['categories_active'] : styles['categories']}>
             <div className={styles['categories_block']} >
                 <FontAwesomeIcon icon={iconsMaping[props.icon]} />
                 <div>{props.title}</div>
