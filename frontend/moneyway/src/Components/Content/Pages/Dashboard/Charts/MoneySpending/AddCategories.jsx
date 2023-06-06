@@ -131,8 +131,10 @@ export default function AddCategories() {
                             })
 
                         }
-                        <button style={append ? { pointerEvents: 'visible' } : { pointerEvents: 'none', opacity: '60%' }}>Append</button>
+
                         <div className={text === '' ? styles['unvisible_sum'] : styles['visible_sum']}>{text} ₽</div>
+
+                        <button style={append ? { pointerEvents: 'visible' } : { pointerEvents: 'none', opacity: '60%' }}>Append</button>
 
 
                     </div>

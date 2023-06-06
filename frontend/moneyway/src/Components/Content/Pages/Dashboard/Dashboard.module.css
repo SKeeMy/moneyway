@@ -88,7 +88,8 @@
 .Dashboard_card_active .input_card {
     color: white;
 }
-.Dashboard_card_active i{ 
+
+.Dashboard_card_active i {
     display: none;
 }
 
@@ -147,6 +148,7 @@
 
 .graphics {
     margin-top: 10px;
+    min-height: 100%;
 }
 
 .form_card {

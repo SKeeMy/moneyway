@@ -47,7 +47,7 @@
 }
 
 .categories_wrapper {
-    max-height: 35vh;
+    max-height: 100%;
     overflow-y: auto;
     padding-bottom: 20px;
     display: grid;
@@ -118,7 +118,7 @@
     transition: ease-in-out .3s;
     color: black;
     font-weight: bold;
-    padding-left: 20px;
+    min-width: 150px;
 }
 
 
@@ -130,6 +130,7 @@
     align-items: center;
     z-index: 3;
     max-height: 70%;
+    margin: 0 auto;
 }
 
 .categories div {
@@ -204,4 +205,51 @@
 
 .picked_wrapper button:hover {
     filter: brightness(120%)
+}
+
+/* Chart */
+
+.bar_wrapper {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    background: #444444;
+    min-height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.308);
+    border-radius: 30px;
+    box-shadow: rgb(255 0 255 / 66%) 2px 7px 26px -3px;
+
+}
+
+.bar_chart {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    background-color: #303030;
+    border-radius: 30px 0 0 30px;
+    border-right: 4px dashed #E57373;
+}
+
+.bar_chart_cicle {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    background-color: #303030;
+    border-left: 4px dashed #E57373;
+    border-radius: 0 30px 30px 0;
+}
+
+.switch_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.switch_wrapper .switch {
+    border: 1px solid white;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #5a5a5a;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }

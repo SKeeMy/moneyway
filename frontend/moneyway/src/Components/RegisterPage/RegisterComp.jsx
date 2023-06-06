@@ -18,7 +18,6 @@ export default function RegisterComp() {
         login: "",
         email: "",
         password: "",
-        confirmPassword: "",
         age: ""
     });
 
@@ -88,10 +87,14 @@ export default function RegisterComp() {
         axios.post('http://backend/api/registration', values)
             .then(res => {
                 console.log('Response from API: ', res);
-                localStorage.setItem('data:', inputs.name);
                 if (res.status === 201) {
                     setLoading(false)
                     navigate('/login')
+                }
+                if (res.status === 204) {
+                    setLoading(false)
+                    alert('Some error! Try to write this again')
+                    navigate('/')
                 }
             })
             .catch(error => {
