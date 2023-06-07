@@ -7,9 +7,9 @@ import DashboardCard from './DashboardCard';
 import { DashboardCards } from './DashboardCard';
 import TotalBalance from './Charts/TotalBalance/TotalBalance';
 import MoneySpending from './Charts/MoneySpending/MoneySpending';
-import MoneyIncome from './Charts/MoneySaved/MoneySaved';
+import MoneyIncome from './Charts/MoneyIncome/MoneyIncome';
 import MoneySpendingEdit from './Charts/MoneySpending/MoneySpendingEdit';
-import MoneyIncomeEdit from './Charts/MoneySaved/MoneyIncomeEdit';
+import MoneyIncomeEdit from './Charts/MoneyIncome/MoneyIncomeEdit';
 
 const dashboardCards = [
     {

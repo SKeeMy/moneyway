@@ -2,19 +2,19 @@ import React, { useState } from 'react'
 import styles from './MoneySpending.module.css'
 import { Bar } from 'react-chartjs-2'
 import MoneySpendingBar, { MoneySpendingBarCircle } from './MoneySpendingBar'
-import { Data } from '../../../../../../utils/Data'
+import { DATA_7_SPEND } from '../../../../../../utils/Data'
 
 
 export default function MoneySpending() {
+    const DATA = DATA_7_SPEND
 
 
-
-    const dateLabels = Data[0].diagram.reduce((acc, curr) => {
+    const dateLabels = DATA[0].diagram.reduce((acc, curr) => {
         acc.push(curr.created_at);
         return acc;
     }, []);
 
-    const balanceData = Data[0].diagram.reduce((acc, curr) => {
+    const balanceData = DATA[0].diagram.reduce((acc, curr) => {
         acc.push(curr.balance);
         return acc;
     }, []);
@@ -35,10 +35,10 @@ export default function MoneySpending() {
         ]
     });
     const [spendCategory, setSpendCategory] = useState({
-        labels: Object.keys(Data[0].cicle),
+        labels: Object.keys(DATA[0].cicle),
         datasets: [{
             label: "Categories",
-            data: Object.values(Data[0].cicle)
+            data: Object.values(DATA[0].cicle)
         }]
     })
 
