@@ -74,37 +74,14 @@ export function MoneySpendingBarCircle({ categoryData }) {
 
     const options = {
         responsive: true,
-        scales: {
-            x: {
-                scaleLabel: {
-                    display: false,
-                    labelString: 'X Axis Title',
-                },
-                grid: {
-                    display: false,
-                },
-                ticks: {
-                    display: false,
-                    color: 'white',
-                    font: {
-                        family: "'Poppins', sans-serif",
-                        size: 14
-                    }
-                },
-            },
-
-            y: {
-                display: false,
-                grid: {
-                    display: false,
-                },
-            },
-
-        },
         plugins: {
             legend: {
                 display: true,
-                position: 'bottom'
+                position: 'bottom',
+                font: {
+                    family: "'Poppins', sans-serif",
+                    color: 'white'
+                }
             },
             title: {
                 display: true,
@@ -118,6 +95,9 @@ export function MoneySpendingBarCircle({ categoryData }) {
             },
         }
     };
+
+    <Doughnut options={options} data={categoryData} />
+
 
     return (
         <div className={styles['bar_chart_cicle']}>

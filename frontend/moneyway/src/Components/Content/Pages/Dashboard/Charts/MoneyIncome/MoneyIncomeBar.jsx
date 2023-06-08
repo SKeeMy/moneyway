@@ -8,7 +8,7 @@ ChartJS.register(
     LinearScale,
     BarElement,
     Tooltip,
-    Legend
+    Legend,
 )
 
 export default function MoneyIncomeBar({ chartData }) {
@@ -73,37 +73,14 @@ export function MoneyIncomeBarCircle({ categoryData }) {
 
     const options = {
         responsive: true,
-        scales: {
-            x: {
-                scaleLabel: {
-                    display: false,
-                    labelString: 'X Axis Title',
-                },
-                grid: {
-                    display: false,
-                },
-                ticks: {
-                    display: false,
-                    color: 'white',
-                    font: {
-                        family: "'Poppins', sans-serif",
-                        size: 14
-                    }
-                },
-            },
-
-            y: {
-                display: false,
-                grid: {
-                    display: false,
-                },
-            },
-
-        },
         plugins: {
             legend: {
                 display: true,
-                position: 'bottom'
+                position: 'bottom',
+                font: {
+                    family: "'Poppins', sans-serif",
+                    color: 'white'
+                }
             },
             title: {
                 display: true,
@@ -118,9 +95,13 @@ export function MoneyIncomeBarCircle({ categoryData }) {
         }
     };
 
+    <Doughnut options={options} data={categoryData} />
+
+
     return (
         <div className={styles['bar_chart_cicle']}>
             <Doughnut options={options} data={categoryData} />
         </div>
+
     )
 }

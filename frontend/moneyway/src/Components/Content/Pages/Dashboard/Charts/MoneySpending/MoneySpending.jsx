@@ -38,16 +38,17 @@ export default function MoneySpending() {
         labels: Object.keys(DATA[0].cicle),
         datasets: [{
             label: "Categories",
-            data: Object.values(DATA[0].cicle)
+            data: Object.values(DATA[0].cicle),
+            borderWidth: 3,
+            cutoutPercentage: 50,
+            borderRadius: 20,
         }]
     })
 
 
     return (
         <div className={styles['bar_wrapper']}>
-
             <div style={{ display: 'grid', gridTemplateColumns: '88% 12%' }}>
-
                 <MoneySpendingBar chartData={spendData} />
                 <div className={styles['switch_wrapper']}>
                     <div className={styles['switch']}>7 days</div>

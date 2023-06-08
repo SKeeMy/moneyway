@@ -6,7 +6,7 @@ import Loader from '../../../../../../utils/Loading/Loader/Loader'
 
 
 export default function MoneyIncome() {
-    const [days, setDays] = useState(true)
+    const [days, setDays] = useState(false)
     const [spendCategory, setSpendCategory] = useState({ labels: [], datasets: [] });
     const [spendData, setSpendData] = useState({ labels: [], datasets: [] });
     const [loading, setLoading] = useState(false)
@@ -49,6 +49,9 @@ export default function MoneyIncome() {
                 {
                     label: "Categories",
                     data: Object.values(DATA[0].cicle),
+                    borderWidth: 3,
+                    cutoutPercentage: 50,
+                    borderRadius: 20,
                 },
             ],
         });
@@ -56,18 +59,17 @@ export default function MoneyIncome() {
 
 
     return (
-        loading ? <div style={{ display: 'grid', gridTemplateColumns: '100%' }} className={styles['bar_wrapper']}><Loader /></div> :
-            <div className={styles['bar_wrapper']}>
-                <div style={{ display: 'grid', gridTemplateColumns: '88% 12%' }}>
-                    <MoneyIncomeBar chartData={spendData} />
-                    <div className={styles['switch_wrapper']}>
-                        <div onClick={() => setDays(false)} className={days ? styles['switch'] : styles['switch_active']}>7 days</div>
-                        <div onClick={() => setDays(true)} className={!days ? styles['switch'] : styles['switch_active']}>30 days</div>
-                    </div>
-                </div>
-                <div>
-                    <MoneyIncomeBarCircle categoryData={spendCategory} />
+        <div className={styles['bar_wrapper']}>
+            <div style={{ display: 'grid', gridTemplateColumns: '85% 15%' }}>
+                <MoneyIncomeBar chartData={spendData} />
+                <div className={styles['switch_wrapper']}>
+                    <div onClick={() => setDays(false)} className={days ? styles['switch'] : styles['switch_active']}>7 days</div>
+                    <div onClick={() => setDays(true)} className={!days ? styles['switch'] : styles['switch_active']}>30 days</div>
                 </div>
             </div>
+            <div className={styles['money-income-bar-circle']}>
+                <MoneyIncomeBarCircle categoryData={spendCategory} />
+            </div>
+        </div>
     )
 }  
