@@ -11,7 +11,7 @@ class ClientController extends Controller
 {
     public function registration(Request $request){
         
-        if ($request -> {"password"} != $request -> {"confirmPassword"}) {
+        if ($request -> {"password"} != $request -> {"ConfirmPassword"}) {
             return response() -> noContent(204, ["Пароли не совпадают"]);
         }
 
