@@ -64,3 +64,16 @@ input[type="number"]:focus {
   appearance: none;
   -moz-appearance: textfield;
 }
+
+input[type="date"]:focus::before {
+  content: none
+}
+
+.non-empty-date input[type="date"]:disabled::before {
+  content: none;
+}
+
+.empty-date input[type="date"]:disabled::before {
+  content: attr(data-placeholder);
+  width: 100%;
+}

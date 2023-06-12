@@ -80,7 +80,7 @@ export default function DashboardCard(props) {
                 <FontAwesomeIcon className={styles['icon']} icon={iconsMaping[props.icon]} />
                 <h3 className={styles['title']}>{props.title}</h3>
                 <form onSubmit={handleSubmit} className={styles['form_card']}>
-                    <div onClick={() => setEdit(prevEdit => !prevEdit)} >
+                    <div onClick={() => setEdit(true)} >
 
                         <input onChange={handleChange} key={props.id} className={edit ? styles['input_card_active'] : styles['input_card']} type="number" value={text} />
                         <i className={styles['currency']}>₽</i>

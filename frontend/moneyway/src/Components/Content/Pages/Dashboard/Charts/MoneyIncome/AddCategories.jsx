@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import styles from './MoneyIncome.module.css'
 import Categories from './Categories';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const items = [
     {
         id: 1,
@@ -72,6 +75,9 @@ const items = [
 
 export default function AddCategories() {
     const [text, setText] = useState('')
+    const [comment, setComment] = useState('')
+    const [title, setTitle] = useState('');
+
     const handleChange = (event) => {
         setText(event.target.value);
     }
@@ -91,8 +97,38 @@ export default function AddCategories() {
         return () => clearTimeout(timer)
     }, [active, text])
     console.log(append)
+    //date
+    const current = new Date();
+    const date = `${current.getDate()}-${current.getMonth() + 1}-${current.getFullYear()}`;
+    const [selectedDate, setSelectedDate] = useState(date)
+    //date 
+    const token = localStorage.getItem('remember_token')
+    const handleChangeComment = (event) => {
+        setComment(event.target.value);
+    }
+    const notify = () => {
+        toast.success("You've sent data")
+    }
+    function sendAPI() {
+        notify()
+        const values = {
+            remember_token: token,
+            category: title,
+            balance: text,
+            comment: comment,
+            date: selectedDate
+        };
+        axios.post('http://backend/api/income/add', values)
+            .then(res => {
+                console.log('Response from API: ', res);
 
+            })
+            .catch(error => {
+                alert('Oops, some error here: ' + error)
+                console.error('Error while sending data:', error)
+            });
 
+    }
 
     return (
         <div className={styles['content_wrapper']}>
@@ -106,7 +142,8 @@ export default function AddCategories() {
                             id={item.id}
                             title={item.title}
                             active={active}
-                            setActive={setActive} />
+                            setActive={setActive}
+                            setTitle={setTitle} />
 
                     })
                 }
@@ -136,8 +173,8 @@ export default function AddCategories() {
 
                         <div className={text === '' ? styles['unvisible_sum'] : styles['visible_sum']}>{text} ₽</div>
 
-                        <button style={append ? { pointerEvents: 'visible' } : { pointerEvents: 'none', opacity: '60%' }}>Append</button>
-
+                        <button onClick={sendAPI} style={append ? { pointerEvents: 'visible' } : { pointerEvents: 'none', opacity: '60%' }}>Append</button>
+                        <ToastContainer />
 
                     </div>
                 </div>
@@ -152,7 +189,11 @@ export default function AddCategories() {
                     return undefined
                 })}
                 <div>
-                    <textarea name="" id="" cols="26" rows="1" placeholder='Comment'></textarea>
+                    <textarea value={comment} onChange={handleChangeComment} name="" id="" cols="26" rows="1" placeholder='Comment'></textarea>
+                </div>
+                <div>
+                    <h3>Selected date <h4>{selectedDate}</h4></h3>
+                    <input style={{ cursor: 'pointer' }} type="date" lang="en-US" onChange={e => setSelectedDate(e.target.value)} />
                 </div>
             </div>
         </div>

@@ -12,7 +12,6 @@ ChartJS.register(
 )
 
 export default function MoneySpendingBar({ data }) {
-    let a = "Money Spending last 7 days"
 
     const options = {
         responsive: true,
@@ -49,7 +48,6 @@ export default function MoneySpendingBar({ data }) {
             },
             title: {
                 display: true,
-                text: a,
                 font: {
                     family: "'Poppins', sans-serif",
                     size: 20

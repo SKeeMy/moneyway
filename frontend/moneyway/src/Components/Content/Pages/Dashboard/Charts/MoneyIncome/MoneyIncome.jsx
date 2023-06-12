@@ -9,6 +9,7 @@ export default function MoneyIncome() {
     const [chart, setChart] = useState([])
     const [cicle, setCircle] = useState([])
     const [loading, setLoading] = useState(false)
+
     const [url, setUrl] = useState('http://backend/api/income/week')
 
     function formatDate(dateString) {
@@ -27,20 +28,22 @@ export default function MoneyIncome() {
     }, [url]);
     useEffect(() => {
         const fetchData = async () => {
-            await axios.post(url, { remember_token: '"test" 3' })
+            await axios.post(url, { remember_token: localStorage.getItem('remember_token') })
                 .then(res => {
                     console.log(res.data.data.diagram)
                     setChart(res.data.data.diagram)
                     setCircle(res.data.data.cicle)
-                    console.log(cicle)
                 })
                 .catch(error => {
                     alert('Oops, some error here: ' + error);
                     console.error('Error while sending data:', error);
                 });
         }
-        fetchData();
-    }, [url, cicle])
+
+        setTimeout(() => {
+            fetchData();
+        }, 100)
+    }, [url])
     const labelsGraphic = chart.map(item => formatDate(item.created_at))
     let data = {
         labels: labelsGraphic,
@@ -56,20 +59,41 @@ export default function MoneyIncome() {
             }
         ]
     }
-    const categoryLabels = Object.keys(cicle)
-    let categoryData = {
-        labels: cicle === [] ? [] : categoryLabels,
-        datasets: [
-            {
-                label: "Categories",
-                data: Object.values(cicle),
-                borderWidth: 3,
-                backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#8B008B", "#FFA07A", "#00FFFF", "#7B68EE", "#00FA9A", "#FF69B4", "#1E90FF", "#FFD700", "#00FF7F"],
-                cutoutPercentage: 50,
-                borderRadius: 20,
-            },
-        ]
 
+    const categoryLabels = cicle ? Object.keys(cicle) : [];
+    let categoryData = {};
+    if (cicle && categoryLabels.length > 0) {
+        categoryData = {
+            labels: categoryLabels,
+            datasets: [
+                {
+                    label: "Categories",
+                    data: Object.values(cicle),
+                    borderWidth: 3,
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        "#8B008B",
+                        "#FFA07A",
+                        "#00FFFF",
+                        "#7B68EE",
+                        "#00FA9A",
+                        "#FF69B4",
+                        "#1E90FF",
+                        "#FFD700",
+                        "#00FF7F"
+                    ],
+                    cutoutPercentage: 50,
+                    borderRadius: 20
+                }
+            ]
+        };
+    } else {
+        categoryData = {
+            labels: ["Here is empty, wait more information"],
+            datasets: []
+        };
     }
 
 
