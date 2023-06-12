@@ -61,7 +61,8 @@ class IncomeController extends Controller
             ->orderBy('created_at', 'asc')
             ->get(['balance', 'created_at'])
             ->toArray();
-        if ($income) {
+        if ($income) 
+        {
             $grouped = collect($income)->groupBy('created_at');
             $incomeByDate = [];
             foreach ($grouped as $date => $values) {
@@ -78,7 +79,8 @@ class IncomeController extends Controller
             $incomeByDate = $this-> generateDateRange(Carbon::parse($start_date),
             Carbon::parse($end_date), $balance);
         }
-        else{
+        else
+        {
             $incomeByDate = $this -> generate_date_null(6);
         }
         $income_category = Income::where([['remember_token', $remember_token], 
@@ -180,16 +182,19 @@ class IncomeController extends Controller
         $k = 0;
         $n = 0;
         $dates = [];
-        for($date = $start_date -> copy(); $date -> lte($end_date); $date -> addDay()) {
-            if (count($balance) < $k || Carbon::parse($balance[$n]["created_at"])->toDateString() !== $date->toDateString()) {
+        for($date = $start_date -> copy(); $date -> lte($end_date); $date -> addDay()) 
+        {
+            if (!isset($balance[$n]) || Carbon::parse($balance[$n]["created_at"])->toDateString() !== $date->toDateString()) {
                 $dates[$k] = ["balance" => 0,"created_at" => $date->format('Y-m-d')];
                 $k++;
-                continue;
             }
+            else
+            {
             $balance[$n]["created_at"]= Carbon::parse($balance[$n]["created_at"])->format('Y-m-d');
             $dates[$k] = $balance[$n];
             $k++;
             $n++;
+            }
         }
         return $dates;
     }
