@@ -5,13 +5,17 @@ import { useState } from 'react';
 import Tilt from 'react-parallax-tilt'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 import Loading from '../../utils/Loading/Loading';
+import Modal from '../../utils/alerts/modal';
 
 
 
 
 export default function RegisterComp() {
     const [loading, setLoading] = useState(false)
+    const [errorMsg, setErrorMsg] = useState('');
+    const [showError, setShowError] = useState(false)
     const [values, setValues] = useState({
         email: "",
         password: "",
@@ -45,34 +49,41 @@ export default function RegisterComp() {
 
 
 
-
     function sendAPI(values) {
         setLoading(true)
         axios.post('http://backend/api/login', values)
             .then(res => {
                 console.log(res)
-                const token = res.data.data.remember_token;
-                const login = res.data.data.login;
-                console.log('Response from API: ', token);
-                console.log('Response from API: ', login);
-                localStorage.setItem(values.email, token);
-                localStorage.setItem('remember_token', token);
-                localStorage.setItem('login', login);
                 if (res.status === 200) {
+                    const token = res.data.data.remember_token;
+                    const login = res.data.data.login;
+                    console.log('Response from API: ', token);
+                    console.log('Response from API: ', login);
+                    localStorage.setItem(values.email, token);
+                    localStorage.setItem('remember_token', token);
+                    localStorage.setItem('login', login);
                     setLoading(false)
                     navigate('/Layout')
                 }
-
+                if (res.status === 204) {
+                    setShowError(true)
+                    setErrorMsg(JSON.stringify(res.statusText))
+                    navigate('/login')
+                }
+                if (res.status === 500) {
+                    setShowError(true)
+                    setErrorMsg(JSON.stringify(res.statusText))
+                    navigate('/login')
+                }
             })
-            .catch(error => {
-                alert('Oops, some error here: ' + error)
-                console.error('Error while sending data:', error)
-                setLoading(false)
-                navigate('/login')
+        // .catch(error => {
+        //     console.log(error)
+        //     navigate('/login')
 
-            });
+        // })
 
     }
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -80,7 +91,10 @@ export default function RegisterComp() {
     }
 
 
-
+    const handleCloseModal = () => {
+        setShowError(false);
+        setLoading(false)
+    };
 
     if (loading === false)
         return (
@@ -125,6 +139,22 @@ export default function RegisterComp() {
             </div>
         )
     else
-        return <Loading />
+        return (<div>
+            {showError && (
+                <motion.div
+                    className="backdrop"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}>
+                    <Modal
+                        title="ERROR"
+                        message={JSON.stringify(errorMsg)}
+                        onClose={handleCloseModal}
+                        onConfirm={handleCloseModal}
+                    />
+                </motion.div>)}
+            <Loading />
+        </div>
+        )
 
 }

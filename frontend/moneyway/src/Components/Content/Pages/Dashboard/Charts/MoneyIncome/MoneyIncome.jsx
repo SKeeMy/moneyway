@@ -1,75 +1,94 @@
 import React, { useState, useEffect } from 'react'
 import styles from './MoneyIncome.module.css'
 import MoneyIncomeBar, { MoneyIncomeBarCircle } from './MoneyIncomeBar'
-import { DATA_7_SPEND, DATA_30_SPEND } from '../../../../../../utils/Data'
 import Loader from '../../../../../../utils/Loading/Loader/Loader'
+import axios from 'axios'
 
 
 export default function MoneyIncome() {
-    const [days, setDays] = useState(false)
-    const [spendCategory, setSpendCategory] = useState({ labels: [], datasets: [] });
-    const [spendData, setSpendData] = useState({ labels: [], datasets: [] });
+    const [chart, setChart] = useState([])
+    const [cicle, setCircle] = useState([])
     const [loading, setLoading] = useState(false)
+    const [url, setUrl] = useState('http://backend/api/income/week')
+
+    function formatDate(dateString) {
+        let date = new Date(dateString);
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        return day + '-' + month + '-' + year;
+    };
+
     useEffect(() => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
         }, 1000);
-        let DATA;
-
-        if (days === false) {
-            DATA = DATA_7_SPEND;
-        } else {
-            DATA = DATA_30_SPEND;
+    }, [url]);
+    useEffect(() => {
+        const fetchData = async () => {
+            await axios.post(url, { remember_token: '"test" 3' })
+                .then(res => {
+                    console.log(res.data.data.diagram)
+                    setChart(res.data.data.diagram)
+                    setCircle(res.data.data.cicle)
+                    console.log(cicle)
+                })
+                .catch(error => {
+                    alert('Oops, some error here: ' + error);
+                    console.error('Error while sending data:', error);
+                });
         }
-        const dateLabels = DATA[0].diagram.reduce((acc, curr) => {
-            acc.push(curr.created_at);
-            return acc;
-        }, []);
-        const balanceData = DATA[0].diagram.reduce((acc, curr) => {
-            acc.push(curr.balance);
-            return acc;
-        }, []);
-        setSpendData({
-            labels: dateLabels,
-            datasets: [
-                {
-                    data: balanceData,
-                    backgroundColor: ["rgb(167, 167, 167)"],
-                    hoverBackgroundColor: ["#FF6384"],
-                    borderColor: "White",
-                    borderWidth: 3,
-                    borderRadius: 20,
-                },
-            ],
-        });
-        setSpendCategory({
-            labels: Object.keys(DATA[0].cicle),
-            datasets: [
-                {
-                    label: "Categories",
-                    data: Object.values(DATA[0].cicle),
-                    borderWidth: 3,
-                    cutoutPercentage: 50,
-                    borderRadius: 20,
-                },
-            ],
-        });
-    }, [days]);
+        fetchData();
+    }, [url, cicle])
+    const labelsGraphic = chart.map(item => formatDate(item.created_at))
+    let data = {
+        labels: labelsGraphic,
+        datasets: [
+            {
+                label: "Money Spend",
+                data: chart.map(item => item.balance),
+                backgroundColor: ['rgb(167, 167, 167)'],
+                hoverBackgroundColor: ['#FF6384'],
+                borderColor: 'White',
+                borderWidth: 3,
+                borderRadius: 20,
+            }
+        ]
+    }
+    const categoryLabels = Object.keys(cicle)
+    let categoryData = {
+        labels: cicle === [] ? [] : categoryLabels,
+        datasets: [
+            {
+                label: "Categories",
+                data: Object.values(cicle),
+                borderWidth: 3,
+                backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#8B008B", "#FFA07A", "#00FFFF", "#7B68EE", "#00FA9A", "#FF69B4", "#1E90FF", "#FFD700", "#00FF7F"],
+                cutoutPercentage: 50,
+                borderRadius: 20,
+            },
+        ]
+
+    }
+
 
 
     return (
-        <div className={styles['bar_wrapper']}>
-            <div style={{ display: 'grid', gridTemplateColumns: '85% 15%' }}>
-                <MoneyIncomeBar chartData={spendData} />
-                <div className={styles['switch_wrapper']}>
-                    <div onClick={() => setDays(false)} className={days ? styles['switch'] : styles['switch_active']}>7 days</div>
-                    <div onClick={() => setDays(true)} className={!days ? styles['switch'] : styles['switch_active']}>30 days</div>
+        loading ? <div style={{ display: 'grid', gridTemplateColumns: '100%' }} className={styles['bar_wrapper']}><Loader /></div> :
+            <div className={styles['bar_wrapper']}>
+                <div style={{ display: 'grid', gridTemplateColumns: '85% 15%' }}>
+                    <MoneyIncomeBar data={data} />
+                    <div className={styles['switch_wrapper']}>
+                        <div onClick={() => setUrl('http://backend/api/income/week')}
+                            className={url === 'http://backend/api/income/week' ? styles['switch_active'] : styles['switch']}>7 days</div>
+                        <div onClick={() => setUrl('http://backend/api/income/month')}
+                            className={url === 'http://backend/api/income/month' ? styles['switch_active'] : styles['switch']}>30 days</div>
+                    </div>
+                </div>
+                <div>
+                    <MoneyIncomeBarCircle categoryData={categoryData} />
                 </div>
             </div>
-            <div className={styles['money-income-bar-circle']}>
-                <MoneyIncomeBarCircle categoryData={spendCategory} />
-            </div>
-        </div>
     )
 }  

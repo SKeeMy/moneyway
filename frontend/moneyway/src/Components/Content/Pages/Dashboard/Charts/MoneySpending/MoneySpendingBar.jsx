@@ -11,7 +11,7 @@ ChartJS.register(
     Legend
 )
 
-export default function MoneySpendingBar({ chartData }) {
+export default function MoneySpendingBar({ data }) {
     let a = "Money Spending last 7 days"
 
     const options = {
@@ -64,7 +64,7 @@ export default function MoneySpendingBar({ chartData }) {
 
     return (
         <div className={styles['bar_chart']}>
-            <Bar data={chartData} options={options} />
+            <Bar data={data} options={options} />
         </div>
     )
 }

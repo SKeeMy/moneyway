@@ -227,6 +227,7 @@
     background-color: #303030;
     border-radius: 30px 0 0 30px;
     border-right: 4px dashed #E57373;
+    padding-left: 5px;
 }
 
 .bar_chart_cicle {
@@ -239,6 +240,7 @@
 }
 
 .switch_wrapper {
+    margin-left: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -252,4 +254,33 @@
     background-color: #5a5a5a;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.switch {
+    border: 1px solid white;
+    padding: 10px;
+    cursor: pointer;
+    min-width: 70%;
+    background-color: #5a5a5a;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    opacity: 70%;
+}
+
+.switch_active {
+
+    border: 1px solid white;
+    padding: 10px;
+    cursor: pointer;
+    min-width: 70%;
+    background-color: #ff5588;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    transition: ease-in-out .3s;
+    opacity: 100%;
+}
+
+.switch:hover {
+    transition: all .3s;
+    background-color: #FF7AA2;
 }

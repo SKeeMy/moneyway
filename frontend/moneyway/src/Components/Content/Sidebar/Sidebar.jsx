@@ -5,6 +5,8 @@ import { faBell, faDashboard, faChartLine, faProjectDiagram, faPencilAlt, faCare
 import { sidebarItemsManage, sidebarItemsPreference } from './../../../utils/sidebarItems';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Modal from '../../../utils/alerts/modal';
 
 const iconsMaping = {
   "faDashboard": faDashboard,
@@ -22,10 +24,42 @@ const iconsMapingPref = {
 export default function Sidebar(props) {
   const [visibleManage, setVisibleManage] = useState(false);
   const [visiblePreference, setVisiblePreference] = useState(false);
+  const [showModal, setShowModal] = useState(false)
+  const navigate = useNavigate();
 
   const LOGIN = localStorage.getItem('login');
+
+
+  const handleLogout = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleConfirmLogout = () => {
+    setShowModal(false);
+    localStorage.clear();
+    navigate('/login')
+  };
+
+
+
+
+
   return (
+
+
     <div>
+      {showModal && (<motion.div>
+        <Modal
+          title="Are you sure?"
+          message="Do you want to logout?"
+          onClose={handleCloseModal}
+          onConfirm={handleConfirmLogout}
+        />
+      </motion.div>)}
       <div onClick={() => props.setSidebar(prevSetSidebar => !prevSetSidebar)} className={styles['sidebar_button']}>
         {!props.sidebar && <FontAwesomeIcon className={styles['bars']} icon={faBars} />}
       </div>
@@ -95,9 +129,8 @@ export default function Sidebar(props) {
             <div className={styles['user']}>
               <img src="avatar.png" alt="Avatart" />
               <span className={styles['username']}>{LOGIN}</span>
-              <FontAwesomeIcon icon={faRightFromBracket} className={styles['logout_icon']} />
+              <FontAwesomeIcon onClick={handleLogout} icon={faRightFromBracket} className={styles['logout_icon']} />
             </div>
-
           </motion.div>
 
         )}

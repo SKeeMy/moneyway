@@ -11,7 +11,7 @@ ChartJS.register(
     Legend,
 )
 
-export default function MoneyIncomeBar({ chartData }) {
+export default function MoneyIncomeBar({ data }) {
     let a;
     const options = {
         responsive: true,
@@ -63,7 +63,7 @@ export default function MoneyIncomeBar({ chartData }) {
 
     return (
         <div className={styles['bar_chart']}>
-            <Bar data={chartData} options={options} />
+            <Bar data={data} options={options} />
         </div>
     )
 }
