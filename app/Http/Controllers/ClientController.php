@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ApiHelloResource;
 use Illuminate\Http\Request;
@@ -9,9 +11,10 @@ use Illuminate\Support\Str;
 
 class ClientController extends Controller
 {
-    public function registration(Request $request){
-        
-        if ($request -> {"password"} != $request -> {"ConfirmPassword"}) {
+    public function registration(Request $request)
+    {
+        if ($request -> {"password"} != $request -> {"ConfirmPassword"}) 
+        {
             return response() -> noContent(204, ["Пароли не совпадают"]);
         }
 
@@ -40,7 +43,7 @@ class ClientController extends Controller
     }
 
     public function change_password(Request $request){
-        $token = $request -> {"token"};
+        $token = $request -> {"remember_token"};
         $old_password = $request -> {"old_password"};
         $new_password = $request -> {"new_password"};
         $user = Client::firstWhere('remember_token', $token);

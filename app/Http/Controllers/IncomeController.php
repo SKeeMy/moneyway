@@ -27,9 +27,9 @@ class IncomeController extends Controller
     {
         $remember_token = $request -> {"remember_token"};
         $category = $request -> {"category"};
-        $sum = $request -> {"balance"} ;
+        $sum = $request -> {"balance"};
         $comment = $request -> {"comment"};
-        $created_at = Carbon::parse( $request -> {"date"});
+        $created_at = Carbon::parse($request -> {"date"});
         $new_income = new Income();
         $new_income -> category = $category;
         $new_income -> balance = $sum;
@@ -124,7 +124,8 @@ class IncomeController extends Controller
             $incomeByDate = $this-> generateDateRange(Carbon::parse($start_date),
             Carbon::parse($end_date), $balance);
         }
-        else{
+        else
+        {
             $incomeByDate = $this -> generate_date_null(29);
         }
         $income_category = Income::where([['remember_token', $remember_token], 
@@ -132,14 +133,16 @@ class IncomeController extends Controller
             ->orderBy('created_at', 'asc')
             ->get(['balance', 'category'])
             ->toArray();
-        if($income_category){
+        if($income_category)
+        {
             $grouped = collect($income_category)->groupBy('category');
             $incomeByCategory = [];
             foreach ($grouped as $date => $values) {
                 $incomeByCategory[$date] = $values->sum('balance');
             }
         }
-        else{
+        else
+        {
             $incomeByCategory = null;
         }
         $result = ['diagram' => $incomeByDate, 'cicle' => $incomeByCategory];

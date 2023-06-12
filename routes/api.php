@@ -4,7 +4,9 @@ use App\Http\Controllers\ApiHello;
 use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\IncomeController;
+use App\Models\Expenses;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -59,15 +61,15 @@ Route::middleware('cors')->group(function () {
     });
 
     Route::prefix('expenses')->group(function(){
-        Route::post('/add',[IncomeController::class, 'add']
+        Route::post('/add',[ExpensesController::class, 'add']
         );
-        Route::post('/week', [IncomeController::class, 'week_api']
+        Route::post('/week', [ExpensesController::class, 'week_api']
         );
-        Route::post('/month', [IncomeController::class, 'month_api']
+        Route::post('/month', [ExpensesController::class, 'month_api']
         );
-        Route::post('/history', [IncomeController::class, 'history']
+        Route::post('/history', [ExpensesController::class, 'history']
         );
-        Route::post('/delete', [IncomeController::class, 'delete']
+        Route::post('/delete', [ExpensesControllerController::class, 'delete']
         );
     });
 
