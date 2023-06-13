@@ -26,6 +26,21 @@ class DashBoardController extends Controller
                 'balance' => $balance
             ]);
     }
+
+    public function add(Request $request)
+    {
+        $remember_token = $request -> {"remember_token"}; 
+        $balance = $request -> {'balance'};
+        $user = Client::firstWhere('remember_token', $remember_token);
+        if ($user) 
+        {
+            $user ->start_balance = $balance;
+            $user-> save();
+            return new ApiHelloResource(['balance' => $balance]);
+        }
+        return response() -> noContent(204);
+    }
+
     public function balance_week(Request $request)
     {
         $remember_token = $request -> {"remember_token"};
