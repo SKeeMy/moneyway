@@ -10,7 +10,7 @@ use Illuminate\Support\Carbon;
 
 class ExpensesController extends Controller
 {
-    public function income_dashboard($remember_token, $date_num)
+    public function expenses_dashboard($remember_token, $date_num)
     {
         $balance = Expenses::where([['remember_token', $remember_token], 
         ['created_at', '>=', now()->subDays($date_num-1)->format('Y-m-d')]])

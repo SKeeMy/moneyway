@@ -12,7 +12,7 @@ class DashBoardController extends Controller
     public function dashboard(Request $request)
     {
         $remember_token = $request -> {"remember_token"};
-        $date_num = $request -> {"date_num"};
+        $date_num = 30;
         $balance = Client::firstWhere('remember_token', $remember_token);
         $incomeController = new IncomeController();
         $income = $incomeController -> income_dashboard($remember_token, $date_num);
@@ -22,7 +22,8 @@ class DashBoardController extends Controller
         return new ApiHelloResource(
             [
                 'income'=> $income,
-                'expenses' => $expenses, 'balance' => $balance
+                'expenses' => $expenses, 
+                'balance' => $balance
             ]);
     }
     public function balance_week(Request $request)
