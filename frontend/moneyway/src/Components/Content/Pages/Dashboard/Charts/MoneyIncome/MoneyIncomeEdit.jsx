@@ -5,12 +5,12 @@ import AddCategories from './AddCategories'
 
 
 
-export default function MoneyIncomeEdit() {
+export default function MoneyIncomeEdit(props) {
 
     return (
         <div className={styles['add_wrapper']}>
             <h2>Adding a new operation</h2>
-            <AddCategories />
+            <AddCategories setSend={props.setSend} send={props.send} />
         </div>
     )
 }

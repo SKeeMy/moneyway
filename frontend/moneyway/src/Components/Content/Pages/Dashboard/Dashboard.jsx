@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Dashboard.module.css'
 import '../../../../App.css'
 import { motion } from 'framer-motion'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DashboardCard from './DashboardCard';
 import { DashboardCards } from './DashboardCard';
 import TotalBalance from './Charts/TotalBalance/TotalBalance';
@@ -10,6 +10,7 @@ import MoneySpending from './Charts/MoneySpending/MoneySpending';
 import MoneyIncome from './Charts/MoneyIncome/MoneyIncome';
 import MoneySpendingEdit from './Charts/MoneySpending/MoneySpendingEdit';
 import MoneyIncomeEdit from './Charts/MoneyIncome/MoneyIncomeEdit';
+import axios from 'axios';
 
 const dashboardCards = [
     {
@@ -46,6 +47,11 @@ export default function Dashboard(props) {
     const [value, setValue] = useState(0);
     const [active, setActive] = useState(0);
     const [addBtn, setAddBtn] = useState(false);
+    const [balance, setBalance] = useState(0);
+    const [spending, setSpending] = useState(0);
+    const [income, setIncome] = useState(0);
+    const [send, setSend] = useState(0);
+    console.log('set send: ' + send)
 
     console.log('add btn = ' + addBtn)
     console.log('active =  ' + active)
@@ -63,12 +69,31 @@ export default function Dashboard(props) {
     const addEdit = () => {
         switch (addBtn) {
             case active === 2:
-                return <MoneySpendingEdit />
+                return <MoneySpendingEdit setSend={setSend} send={send} />
             case active === 3:
-                return <MoneyIncomeEdit />
+                return <MoneyIncomeEdit setSend={setSend} send={send} />
             default: return <TotalBalance />
         }
     }
+    const remember_token = localStorage.getItem("remember_token")
+    useEffect(() => {
+        const postToken = async () => {
+            try {
+                const response = await axios.post('http://backend/api/present_day', { remember_token: remember_token });
+                console.log(response);
+                setBalance(response.data.data.balance);
+                setIncome(response.data.data.income);
+                setSpending(response.data.data.expenses);
+            }
+            catch (error) {
+                console.log(error)
+            }
+        };
+
+        setTimeout(() => {
+            postToken();
+        }, 3000);
+    }, [remember_token, send, balance])
     return (
         <motion.div onClick={() => props.setSidebar(false)}
             initial={{ x: 50 }}
@@ -93,7 +118,13 @@ export default function Dashboard(props) {
                                         totalBalanceChange={totalBalanceChange}
                                         setTotalBalanceChange={setTotalBalanceChange}
                                         value={value}
-                                        setValue={setValue} />
+                                        setValue={setValue}
+                                        balance={balance}
+                                        setBalance={setBalance}
+                                        spending={spending}
+                                        setSpending={setSpending}
+                                        income={income}
+                                        setIncome={setIncome} />
 
                                 )
                             else
@@ -110,7 +141,13 @@ export default function Dashboard(props) {
                                         currency={card.currency}
                                         totalBalanceChange={totalBalanceChange}
                                         setTotalBalanceChange={setTotalBalanceChange}
-                                        setValue={setValue} />
+                                        setValue={setValue}
+                                        balance={balance}
+                                        setBalance={setBalance}
+                                        spending={spending}
+                                        setSpending={setSpending}
+                                        income={income}
+                                        setIncome={setIncome} />
                                 )
                         }
 

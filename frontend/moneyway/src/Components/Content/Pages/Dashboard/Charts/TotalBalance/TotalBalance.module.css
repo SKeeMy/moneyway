@@ -1,0 +1,23 @@
+/* Chart */
+
+.bar_wrapper {
+    display: flex;
+    justify-content: center;
+    background: #444444;
+    min-height: 400px;
+    max-height: 500px;
+    max-width: 100%;
+    min-width: 800px;
+    border: 1px solid rgba(255, 255, 255, 0.308);
+    border-radius: 30px;
+    box-shadow: rgb(255 0 255 / 66%) 2px 7px 26px -3px;
+
+}
+
+.bar_chart {
+    max-height: 500px;
+    max-width: 90%;
+    min-width: 900px;
+    background-color: transparent;
+    border-radius: 30px;
+}

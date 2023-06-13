@@ -70,7 +70,7 @@ const items = [
 
 
 
-export default function AddCategories() {
+export default function AddCategories(props) {
     const [text, setText] = useState('')
     const [comment, setComment] = useState('')
     const handleChange = (event) => {
@@ -108,7 +108,7 @@ export default function AddCategories() {
         toast.success("You've sent data")
     }
     function sendAPI() {
-
+        props.setSend(props.send + 1)
         notify();
         const values = {
             remember_token: token,

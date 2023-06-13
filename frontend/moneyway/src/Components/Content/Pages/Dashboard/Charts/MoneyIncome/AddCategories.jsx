@@ -73,7 +73,7 @@ const items = [
 
 
 
-export default function AddCategories() {
+export default function AddCategories(props) {
     const [text, setText] = useState('')
     const [comment, setComment] = useState('')
     const [title, setTitle] = useState('');
@@ -111,6 +111,7 @@ export default function AddCategories() {
     }
     function sendAPI() {
         notify()
+        props.setSend(props.send + 1)
         const values = {
             remember_token: token,
             category: title,
