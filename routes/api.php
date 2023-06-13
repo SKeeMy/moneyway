@@ -24,18 +24,17 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 */
 
 Route::middleware('cors')->group(function () {
-    //Route на регистрацию пользователя
     Route::post('/registration', [ClientController::class,'registration']
     );
-    //Route на аутентификацию пользователя
     Route::post('/login', [ClientController::class,'login']
     );
     Route::post('/present_day', [DashBoardController::class, 'dashboard']
     );
 
     Route::prefix('settings')->group(function(){
-        //Изменение пароля
         Route::post('/change_password',[ClientController::class,'change_password']
+        );
+        Route::post('/photo',[ClientController::class, 'photo']
         );
     });
 

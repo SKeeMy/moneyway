@@ -28,7 +28,8 @@ class ClientController extends Controller
         return response()-> noContent(201);
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $email = $request -> {"email"};
         $password = $request -> {"password"};
         $user = Client::firstWhere('email', $email);
@@ -42,13 +43,31 @@ class ClientController extends Controller
         return response() -> noContent(204);
     }
 
-    public function change_password(Request $request){
+    public function photo(Request $request)
+    {
+        $remember_token = $request -> {'remember_token'};
+        $user = Client::firstWhere('remember_token', $remember_token);
+        if ($user && $user->photo !== null) {
+            $photo_path = public_path('photo/' . $user->photo);
+            return response() -> file($photo_path);
+        } elseif ($user) {
+            $placeholder_path = public_path('photo/blank-profile-picture.jpg');
+            return response() -> file($placeholder_path);
+        } else {
+            return abort(404);
+        }
+    }
+
+    public function change_password(Request $request)
+    {
         $token = $request -> {"remember_token"};
         $old_password = $request -> {"old_password"};
         $new_password = $request -> {"new_password"};
         $user = Client::firstWhere('remember_token', $token);
-        if ($user && Hash::check($old_password, $user->password)){
-            $user -> update(['password' => $new_password]);
+        if ($user && Hash::check($old_password, $user->password))
+        {
+            $user -> password = Hash::make($new_password);
+            $user -> save();
             return response() -> noContent(201);
         }
         return response() -> noContent(204);
