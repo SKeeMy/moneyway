@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Analytics from './Pages/Analytics/Analytics';
 import Control from './Pages/Control/Control';
 import Report from './Pages/Report/Report';
+import Settings from './Pages/Settings/Settings';
 
 
 
@@ -27,6 +28,8 @@ export default function Layout() {
                 return <Control setSidebar={setSidebar} />
             case 4:
                 return <Report setSidebar={setSidebar} />
+            case 5:
+                return <Settings setSidebar={setSidebar} />
             default: return <Dashboard />
         }
     }
