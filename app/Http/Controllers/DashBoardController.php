@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ApiHelloResource;
 use App\Models\Client;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashBoardController extends Controller
@@ -25,6 +26,24 @@ class DashBoardController extends Controller
                 'expenses' => $expenses, 
                 'balance' => $balance
             ]);
+    }
+
+    public function give(Request $request)
+    {
+        $remember_token = $request -> {"remember_token"};
+        $user = Client::firstWhere('remember_token', $remember_token);
+        if ($user) 
+        {
+            if ($user -> start_balance == null) 
+            {
+                return new ApiHelloResource(["start_balance" => 0]);
+            }
+            else
+            {
+                return new ApiHelloResource(["start_balance" => $user->start_balance]);
+            }
+        }
+        return response()-> noContent(204);
     }
 
     public function add(Request $request)

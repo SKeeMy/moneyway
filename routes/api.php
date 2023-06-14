@@ -40,6 +40,8 @@ Route::middleware('cors')->group(function () {
 
     Route::prefix('balance')->group(function()
     {
+        Route::post('/give',[DashBoardController::class, 'give']
+        );
         Route::post('/add',[DashBoardController::class, 'add']
         );
         Route::post('/week',[DashBoardController::class, 'balance_week']
