@@ -14,12 +14,12 @@ class DashBoardController extends Controller
     {
         $remember_token = $request -> {"remember_token"};
         $date_num = 30;
-        $balance = Client::firstWhere('remember_token', $remember_token);
+        $start_balance = Client::firstWhere('remember_token', $remember_token);
         $incomeController = new IncomeController();
         $income = $incomeController -> income_dashboard($remember_token, $date_num);
         $expensesController = new ExpensesController();
         $expenses = $expensesController -> expenses_dashboard($remember_token, $date_num);
-        $balance = $income - $expenses;
+        $balance = $start_balance->start_balance + $income - $expenses;
         return new ApiHelloResource(
             [
                 'income'=> $income,
@@ -55,7 +55,7 @@ class DashBoardController extends Controller
         {
             $user ->start_balance = $balance;
             $user-> save();
-            return new ApiHelloResource(['balance' => $balance]);
+            return new ApiHelloResource(['start_balance' => $balance]);
         }
         return response() -> noContent(204);
     }
