@@ -51,6 +51,7 @@ export default function Dashboard(props) {
     const [spending, setSpending] = useState(0);
     const [income, setIncome] = useState(0);
     const [send, setSend] = useState(0);
+    const [text, setText] = useState(0);
     console.log('set send: ' + send)
 
     console.log('add btn = ' + addBtn)
@@ -93,7 +94,7 @@ export default function Dashboard(props) {
         setTimeout(() => {
             postToken();
         }, 3000);
-    }, [remember_token, send, balance])
+    }, [remember_token, send, balance, text])
     return (
         <motion.div onClick={() => props.setSidebar(false)}
             initial={{ x: 50 }}
@@ -124,7 +125,9 @@ export default function Dashboard(props) {
                                         spending={spending}
                                         setSpending={setSpending}
                                         income={income}
-                                        setIncome={setIncome} />
+                                        setIncome={setIncome}
+                                        setText={setText}
+                                        text={text} />
 
                                 )
                             else
